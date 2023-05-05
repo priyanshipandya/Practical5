@@ -28,7 +28,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         ),
         child: TextField(
           controller: ctr,
-          onChanged: (change) {
+          onSubmitted: (change) {
             widget.callBackFunction(change);
             setState(() {
               value = change;

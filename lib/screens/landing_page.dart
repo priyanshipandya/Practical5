@@ -110,59 +110,65 @@ class _LandingPageState extends State<LandingPage> {
                                     ),
                                   );
                                 },
-                                child: Material(
-                                  elevation: 7,
-                                  child: AnimatedContainer(
-                                    height: 300,
-                                    width: 270,
-                                    duration: Duration(milliseconds: 300),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Hero(
-                                          tag: "myimage$index",
-                                          transitionOnUserGestures: true,
-                                          child: Image.asset(
-                                            "asset/images/lake.jpeg",
-                                            height: 180,
-                                            width: double.infinity,
-                                            fit: BoxFit.fill,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 10.0, horizontal: 15),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: const [
-                                              Text("Life"),
-                                              Text(
-                                                "2 days ago",
-                                                style: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 12),
+                                child: FittedBox(
+                                  fit: BoxFit.fitHeight,
+                                  child: Material(
+                                    elevation: 7,
+                                    child: AnimatedContainer(
+                                      height: 300,
+                                      width: 270,
+                                      duration: Duration(milliseconds: 300),
+                                      child: SingleChildScrollView(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Hero(
+                                              tag: "myimage$index",
+                                              transitionOnUserGestures: true,
+                                              child: Image.asset(
+                                                "asset/images/lake.jpeg",
+                                                height: 180,
+                                                width: double.infinity,
+                                                fit: BoxFit.fill,
                                               ),
-                                            ],
-                                          ),
-                                        ),
-                                        const Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 15.0),
-                                          child: Text(
-                                            "From small house to duplex house images near the lake in the wooden house.",
-                                            maxLines: 3,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              fontSize: 22,
-                                              fontWeight: FontWeight.bold,
                                             ),
-                                          ),
+                                            Padding(
+                                              padding: const EdgeInsets.symmetric(
+                                                  vertical: 10.0, horizontal: 15),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.spaceBetween,
+                                                children: const [
+                                                  Text("Life"),
+                                                  Text(
+                                                    "2 days ago",
+                                                    style: TextStyle(
+                                                        color: Colors.grey,
+                                                        fontSize: 12),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            const Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 15.0),
+                                              child: Text(
+                                                "From small house to duplex house images near the lake in the wooden house.",
+                                                maxLines: 3,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontSize: 22,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontFamily: 'Instrumentserif'
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -213,12 +219,14 @@ class _LandingPageState extends State<LandingPage> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: const [
                                       Text(
-                                        "Your everyday guide to health living",
+                                        "Your everyday guide to health living is meditation",
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
-                                            fontSize: 18),
+                                            fontSize: 18,
+                                            fontFamily: 'Instrumentserif'
+                                        ),
                                       ),
                                       Text(
                                         "4 days ago",
@@ -230,6 +238,7 @@ class _LandingPageState extends State<LandingPage> {
                                         "Best Folk Medicine provides relevant, accessible and trustworthy information that",
                                         maxLines: 3,
                                         overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(color: Colors.grey),
                                       ),
                                     ],
                                   ),
@@ -267,11 +276,12 @@ class _LandingPageState extends State<LandingPage> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: const [
                                       Text(
-                                        "Your everyday guide to health living",
+                                        "Your everyday guide to health living is meditation",
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
+                                            fontFamily: 'InstrumentSerif',
                                             fontSize: 18),
                                       ),
                                       Text(
@@ -283,6 +293,7 @@ class _LandingPageState extends State<LandingPage> {
                                         "Best Folk Medicine provides relevant, accessible and trustworthy information that",
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(color: Colors.grey),
                                       ),
                                     ],
                                   ),

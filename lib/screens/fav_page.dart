@@ -40,11 +40,11 @@ class FavPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: const [
                         Text(
-                          "Your everyday guide to health living",
+                          "Your everyday guide to health living is meditation",
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                              fontWeight: FontWeight.w600, fontSize: 18),
+                              fontWeight: FontWeight.w600, fontSize: 20, fontFamily: 'InstrumentSerif'),
                         ),
                         Text(
                           "4 days ago",
@@ -54,6 +54,7 @@ class FavPage extends StatelessWidget {
                           "Best Folk Medicine provides relevant, accessible and trustworthy information that",
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
+                          style: TextStyle(color: Colors.grey,),
                         ),
                       ],
                     ),

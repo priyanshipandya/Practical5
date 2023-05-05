@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:practical5/screens/fav_page.dart';
 import 'package:practical5/screens/settings.dart';
@@ -26,11 +27,12 @@ class _HomePageState extends State<HomePage> {
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart), label: "Store"),
+              icon: Icon(CupertinoIcons.house_fill), label: "Home"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.star_sharp), label: "Favourite"),
+              icon: Icon(CupertinoIcons.cart_fill), label: "Store"),
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.star_fill), label: "Favourite"),
           BottomNavigationBarItem(
               icon: Icon(Icons.settings), label: "Settings"),
         ],

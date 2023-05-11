@@ -44,7 +44,7 @@ class FavPage extends StatelessWidget {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                              fontWeight: FontWeight.w600, fontSize: 20, fontFamily: 'InstrumentSerif'),
+                              fontWeight: FontWeight.w600, fontSize: 20, fontFamily: 'Times New Roman'),
                         ),
                         Text(
                           "4 days ago",

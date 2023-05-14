@@ -2,10 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
+import '../Models/news.dart';
+
 class NewsPage extends StatefulWidget {
-  NewsPage({Key? key, required this.index, required this.data}) : super(key: key);
-  final int index;
-  final String? data;
+  NewsPage({Key? key, required this.news}) : super(key: key);
+  final News news;
 
   @override
   State<NewsPage> createState() => _NewsPageState();
@@ -50,9 +51,9 @@ class _NewsPageState extends State<NewsPage> {
                   ),
                 ),
                 Hero(
-                  tag: 'myimage${widget.index}',
+                  tag: 'myimage${widget.news.title}',
                   child: Image.network(
-                    jsonDecode(widget.data!)['data'][widget.index]['imageUrl'],
+                    widget.news.imageUrl!,
                     width: double.infinity,
                     fit: BoxFit.fill,
                   ),
@@ -61,7 +62,7 @@ class _NewsPageState extends State<NewsPage> {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 15.0, vertical: 15),
                   child: Text(
-                    jsonDecode(widget.data!)['data'][widget.index]['title'],
+                    widget.news.title!,
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, fontFamily: 'Times New Roman'),
                   ),
                 ),
@@ -95,7 +96,7 @@ class _NewsPageState extends State<NewsPage> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 15),
                   child: Text(
-                    jsonDecode(widget.data!)['data'][widget.index]['content'],
+                    widget.news.content!,
                     style: TextStyle(fontFamily: 'Times New Roman', fontStyle: FontStyle.italic, fontSize: 17),
                   ),
                 ),

@@ -1,12 +1,10 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:practical5/Models/news.dart';
 import 'package:practical5/custom_widgets/custom_text_field.dart';
-import 'package:practical5/custom_widgets/filtered_data.dart';
 import '../custom_widgets/clickable_artical.dart';
 import '../custom_widgets/scroll_article.dart';
-import 'home_page.dart';
-import 'newspage.dart';
 
 class LandingPage extends StatefulWidget {
   LandingPage({
@@ -18,10 +16,15 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
-  List categories = ['Drinks & Smoothies','Fruits & Veggies',' Science & Tech', 'Business & Politics',];
+  List categories = [
+    'Drinks & Smoothies',
+    'Fruits & Veggies',
+    ' Science & Tech',
+    'Business & Politics',
+  ];
+
   String? getValueFromChild;
-  String? data;
-  var news_length;
+
   bool _loading = false;
 
   void getData() async {
@@ -31,13 +34,22 @@ class _LandingPageState extends State<LandingPage> {
     http.Response response =
         await http.get(Uri.parse("https://inshorts.deta.dev/news?category="));
     if (response.statusCode == 200) {
-      data = response.body; //store response as string
+      var data = response.body;
       setState(() {
-        news_length = jsonDecode(data!)['data']; //get all the data from json string superheros// just printed length of data
+        List news_data_list = jsonDecode(data)['data'];
+
+        for (int i = 0; i < news_data_list.length; i++) {
+          newsList.add(News.fromJson(news_data_list[i]));
+        }
+        print(newsList.map((e) => e.title));
         _loading = false;
       });
+
+      filteredNews = List.from(newsList);
     }
   }
+
+  List<News> filteredNews = [];
 
   @override
   void initState() {
@@ -72,7 +84,22 @@ class _LandingPageState extends State<LandingPage> {
                     child: CustomTextField((String value) {
                       setState(() {
                         getValueFromChild = value;
+                        filteredNews = [];
                       });
+                      newsList.forEach((e) {
+                        if (e.title!
+                                .toLowerCase()
+                                .contains(getValueFromChild!.toLowerCase()) ||
+                            e.content!
+                                .toLowerCase()
+                                .contains(getValueFromChild!.toLowerCase())) {
+                          setState(() {
+                            filteredNews.add(e);
+                          });
+                        }
+                        ;
+                      });
+                      print(filteredNews.length);
                       // print(getValueFromChild);
                     }),
                   ),
@@ -80,29 +107,27 @@ class _LandingPageState extends State<LandingPage> {
                     height: 20,
                   ),
                   getValueFromChild == null || getValueFromChild?.trim() == ''
-                  // ? ScrollArticle(news_length: news_length, data: data)
+                      // ? ScrollArticle(news_length: news_length, data: data)
                       ? Column(
                           children: [
-                            SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              physics: BouncingScrollPhysics(),
-                              child: Row(
-                                children: List.generate(
-                                  categories.length,
-                                  (index) => Padding(
-                                    padding: EdgeInsets.fromLTRB(20, 0, 0, 8),
-                                    child: OutlinedButton(
-                                      style: ButtonStyle(
-                                        padding: MaterialStateProperty.all(
-                                          EdgeInsets.symmetric(
-                                              vertical: 17, horizontal: 15),
-                                        ),
+                            SizedBox(
+                              height: 60,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: categories.length,
+                                itemBuilder: (context, index) => Padding(
+                                  padding: EdgeInsets.fromLTRB(20, 0, 0, 8),
+                                  child: OutlinedButton(
+                                    style: ButtonStyle(
+                                      padding: MaterialStateProperty.all(
+                                        EdgeInsets.symmetric(
+                                            vertical: 17, horizontal: 15),
                                       ),
-                                      onPressed: () {},
-                                      child:  Text(
-                                        categories[index],
-                                        style: TextStyle(color: Colors.black),
-                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: Text(
+                                      categories[index],
+                                      style: TextStyle(color: Colors.black),
                                     ),
                                   ),
                                 ),
@@ -128,7 +153,7 @@ class _LandingPageState extends State<LandingPage> {
                                 ],
                               ),
                             ),
-                            ClickableArticale(news_length: news_length, data: data),
+                            ClickableArticale(),
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                   vertical: 15.0, horizontal: 20),
@@ -149,25 +174,25 @@ class _LandingPageState extends State<LandingPage> {
                                 ],
                               ),
                             ),
-                            ScrollArticle(news_length: news_length, data: data)
+                            ScrollArticle()
                           ],
                         )
                       // : ScrollArticle(news_length: news_length, data: data)
 
-                  : Padding(
+                      : Padding(
                           padding: EdgeInsets.symmetric(horizontal: 20.0),
                           child: Column(
                             children: List.generate(
-                              6,
+                              filteredNews.length,
                               (index) {
                                 return Padding(
                                   padding: EdgeInsets.symmetric(vertical: 5),
                                   child: Row(
                                     children: [
                                       Image.network(
-                                        jsonDecode(data!)['data'][index]['imageUrl'],
+                                        filteredNews[index].imageUrl!,
                                         height: 100,
-                                        width: 150,
+                                        width: 150, //niche pn
                                         fit: BoxFit.fill,
                                       ),
                                       SizedBox(
@@ -181,7 +206,7 @@ class _LandingPageState extends State<LandingPage> {
                                               MainAxisAlignment.start,
                                           children: [
                                             Text(
-                                              jsonDecode(data!)['data'][index]['title'],
+                                              filteredNews[index].title!,
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
@@ -195,7 +220,8 @@ class _LandingPageState extends State<LandingPage> {
                                                   fontWeight: FontWeight.bold),
                                             ),
                                             Text(
-                                              jsonDecode(data!)['data'][index]['content'],
+                                              filteredNews[index]
+                                                  .content!, //wooo hoo
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
                                               style:

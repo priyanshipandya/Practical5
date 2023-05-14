@@ -2,24 +2,23 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
+import '../Models/news.dart';
+
 class ScrollArticle extends StatelessWidget {
-  const ScrollArticle({Key? key, required this.news_length, required this.data})
-      : super(key: key);
-  final news_length;
-  final String? data;
+  const ScrollArticle();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: List.generate(
-        news_length != null ? news_length.length : 0,
+        newsList.length,
         (index) {
           return Padding(
             padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
             child: Row(
               children: [
                 Image.network(
-                  jsonDecode(data!)['data'][index]['imageUrl'],
+                  newsList[index].imageUrl!,
                   height: 100,
                   width: 150,
                   fit: BoxFit.fill,
@@ -33,7 +32,7 @@ class ScrollArticle extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        jsonDecode(data!)['data'][index]['title'],
+                        newsList[index].title!,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -48,7 +47,7 @@ class ScrollArticle extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        jsonDecode(data!)['data'][index]['content'],
+                        newsList[index].content!,
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(color: Colors.grey),

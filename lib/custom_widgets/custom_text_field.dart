@@ -56,6 +56,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     icon: Icon(Icons.highlight_remove),
                     onPressed: () {
                       ctr.clear();
+                      widget.callBackFunction(ctr.text);
                     },
                   )
                 : null,

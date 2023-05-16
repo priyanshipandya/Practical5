@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:practical5/screens/fav_page.dart';
+import 'package:practical5/screens/inc.dart';
 import 'package:practical5/screens/settings.dart';
 import 'package:practical5/screens/store.dart';
 
@@ -14,7 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List pages = [LandingPage(), StorePage(), FavPage(), SettingPage()];
+  List pages = [LandingPage(), StorePage(), FavPage(), SettingPage(), Inc(numbers: 0,)];
   int selectedIndex = 0;
 
   @override
@@ -42,6 +43,7 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(CupertinoIcons.star_fill), label: "Favourite"),
           BottomNavigationBarItem(
               icon: Icon(Icons.settings), label: "Settings"),
+          BottomNavigationBarItem(icon: Icon(Icons.add), label: "IcrDec")
         ],
         onTap: (index) {
           setState(() {

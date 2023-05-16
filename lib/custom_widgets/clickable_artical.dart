@@ -46,7 +46,7 @@ class _ClickableArticaleState extends State<ClickableArticale> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Hero(
-                          tag: "myimage$index",
+                          tag: "myimage${newsList[index].title!}",
                           transitionOnUserGestures: true,
                           child: Image.network(
                             newsList[index].imageUrl!,

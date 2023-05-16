@@ -51,6 +51,7 @@ class _NewsPageState extends State<NewsPage> {
                   ),
                 ),
                 Hero(
+
                   tag: 'myimage${widget.news.title}',
                   child: Image.network(
                     widget.news.imageUrl!,

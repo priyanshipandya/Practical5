@@ -15,6 +15,8 @@ class _StorePageState extends State<StorePage> {
 
   getBooks() {
     setState(() {
+      BookList = [];
+      filteredBooks = [];
       BookStore.forEach((key, value) {
         BookList.add(Book(key, value));
       });
@@ -62,8 +64,7 @@ class _StorePageState extends State<StorePage> {
                 });
               }),
               getValueFromChild == null ||
-                      getValueFromChild!.trim() == '' ||
-                      getValueFromChild!.isEmpty
+                      getValueFromChild!.trim() == ''
                   ? Flexible(
                       child: Padding(
                         padding: const EdgeInsets.only(top: 10.0),

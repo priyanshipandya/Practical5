@@ -16,6 +16,7 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
+
   List categories = [
     'Drinks & Smoothies',
     'Fruits & Veggies',
@@ -28,9 +29,13 @@ class _LandingPageState extends State<LandingPage> {
   bool _loading = false;
 
   void getData() async {
+
     setState(() {
       _loading = true;
+      newsList = [];
+      filteredNews = [];
     });
+
     http.Response response =
         await http.get(Uri.parse("https://inshorts.deta.dev/news?category="));
     if (response.statusCode == 200) {

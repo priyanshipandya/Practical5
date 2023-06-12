@@ -1,0 +1,29 @@
+class StringConstants{
+  static const search = "Search";
+  static const life = "Life";
+  static const twoDaysAgo = "2 days ago";
+  static const fourDaysAgo = "4 days ago";
+  static const increment = "Increment";
+  static const decrement = "Decrement";
+  static const youPressedTheButton = "You pressed the button";
+  static const button1 = "button 1";
+  static const button2 = "button 2";
+  static const bestFolkSubInfo = "Best Folk Medicine provides relevant, accessible and trustworthy information that";
+  static const bestFolkMainInfo = "Your everyday guide to health living is meditation";
+  static const favourites = "Favourites";
+  static const home = "Home";
+  static const store = "Store";
+  static const settings = "Settings";
+  static const icrdcr = "IcrDec";
+  static const mainArticles = "Main articles";
+  static const seeMore = "See More";
+  static const youhaveNotFinishedReading = "You have not finished reading";
+  static const bestFolkMedicine = "Best Folk Medicine";
+  static const back = "Back";
+  static const writtenByBestFolkMedicine = "Written by bestfolkmedicine";
+  static const aboutTheApp = "About the app";
+  static const login = "Login";
+  static const signUp = "Sign Up";
+  static const notification = "Notifications";
+  static const shop = "Shop";
+}

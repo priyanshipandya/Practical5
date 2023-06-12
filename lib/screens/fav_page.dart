@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constants/string_constant.dart';
+
 class FavPage extends StatelessWidget {
   const FavPage({Key? key}) : super(key: key);
 
@@ -14,7 +16,7 @@ class FavPage extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    "Favourites",
+                    "${StringConstants.favourites}",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -40,18 +42,18 @@ class FavPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: const [
                         Text(
-                          "Your everyday guide to health living is meditation",
+                          "${StringConstants.bestFolkMainInfo}",
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               fontWeight: FontWeight.w600, fontSize: 20, fontFamily: 'Times New Roman'),
                         ),
                         Text(
-                          "4 days ago",
+                          "${StringConstants.fourDaysAgo}",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          "Best Folk Medicine provides relevant, accessible and trustworthy information that",
+                          "${StringConstants.bestFolkSubInfo}",
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(color: Colors.grey,),

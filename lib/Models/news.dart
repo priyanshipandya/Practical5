@@ -5,10 +5,11 @@ class News{
 
   News.fromJson(Map data){
     this.title = data['title'];
-    this.content = data['content'];
-    this.imageUrl = data['imageUrl'];
+    this.content = data['description'];
+    this.imageUrl = data['urlToImage'];
   }
 }
+
 
 List<News> newsList = [];
 

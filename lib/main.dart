@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:practical5/constants/string_constant.dart';
 import 'package:practical5/screens/home_page.dart';
 import 'package:practical5/screens/inc.dart';
 import 'package:practical5/screens/dec.dart';
@@ -13,6 +14,7 @@ Future<void> main() async {
 }
 
 final GlobalKey<NavigatorState> navKey = GlobalKey();
+final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
@@ -21,7 +23,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "Best Folk Medicine",
+      title: "${StringConstants.bestFolkMedicine}",
+      navigatorObservers: [routeObserver],
       initialRoute: '/',
       routes: {
         '/' : (context) => HomePage(),

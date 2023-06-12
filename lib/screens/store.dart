@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:practical5/Models/store.dart';
+import '../constants/string_constant.dart';
 import '../custom_widgets/custom_text_field.dart';
 
 class StorePage extends StatefulWidget {
@@ -40,7 +41,7 @@ class _StorePageState extends State<StorePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Shop",
+                "${StringConstants.shop}",
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import '../Models/news.dart';
+import '../constants/string_constant.dart';
 
 class ScrollArticle extends StatelessWidget {
   const ScrollArticle();
@@ -41,7 +42,7 @@ class ScrollArticle extends StatelessWidget {
                             fontFamily: 'Times New Roman'),
                       ),
                       Text(
-                        "4 days ago",
+                        "${StringConstants.fourDaysAgo}",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),

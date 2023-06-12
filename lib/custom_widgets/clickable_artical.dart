@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../Models/news.dart';
 import '../screens/newspage.dart';
+import '../constants/string_constant.dart';
 
 class ClickableArticale extends StatefulWidget {
   ClickableArticale();
@@ -12,6 +13,7 @@ class ClickableArticale extends StatefulWidget {
 
 class _ClickableArticaleState extends State<ClickableArticale> {
   @override
+
   Widget build(BuildContext context) {
     return SizedBox(
       height: 320,
@@ -61,9 +63,9 @@ class _ClickableArticaleState extends State<ClickableArticale> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: const [
-                              Text("Life"),
+                              Text("${StringConstants.life}"),
                               Text(
-                                "2 days ago",
+                                "${StringConstants.twoDaysAgo}",
                                 style:
                                     TextStyle(color: Colors.grey, fontSize: 12),
                               ),

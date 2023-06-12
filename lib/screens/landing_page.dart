@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:practical5/Models/news.dart';
+import 'package:practical5/constants/string_constant.dart';
 import 'package:practical5/custom_widgets/custom_text_field.dart';
 import '../custom_widgets/clickable_artical.dart';
 import '../custom_widgets/scroll_article.dart';
@@ -73,7 +74,7 @@ class _LandingPageState extends State<LandingPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Text(
-                    "Best Folk Medicine",
+                    "${StringConstants.bestFolkMedicine}",
                     style: TextStyle(
                         fontSize: 30,
                         fontFamily: 'Dosis',
@@ -146,13 +147,13 @@ class _LandingPageState extends State<LandingPage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: const [
                                   Text(
-                                    "Main articles",
+                                    "${StringConstants.mainArticles}",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 17),
                                   ),
                                   Text(
-                                    "See more",
+                                    "${StringConstants.seeMore}",
                                     style: TextStyle(color: Colors.grey),
                                   ),
                                 ],
@@ -167,13 +168,13 @@ class _LandingPageState extends State<LandingPage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: const [
                                   Text(
-                                    "You have not finished reading",
+                                    "${StringConstants.youhaveNotFinishedReading}",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16),
                                   ),
                                   Text(
-                                    "See more",
+                                    "${StringConstants.seeMore}",
                                     style: TextStyle(color: Colors.grey),
                                   ),
                                 ],
@@ -220,13 +221,13 @@ class _LandingPageState extends State<LandingPage> {
                                                   fontSize: 18),
                                             ),
                                             Text(
-                                              "4 days ago",
+                                              "${StringConstants.fourDaysAgo}",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold),
                                             ),
                                             Text(
                                               filteredNews[index]
-                                                  .content!, //wooo hoo
+                                                  .content!,
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
                                               style:

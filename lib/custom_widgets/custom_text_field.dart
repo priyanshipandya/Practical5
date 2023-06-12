@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constants/string_constant.dart';
+
 class CustomTextField extends StatefulWidget {
   CustomTextField(this.callBackFunction);
 
@@ -48,7 +50,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             });
           },
           decoration: InputDecoration(
-            hintText: "Search",
+            hintText: StringConstants.search,
             border: OutlineInputBorder(borderSide: BorderSide.none),
             prefixIcon: Icon(Icons.search),
             suffixIcon: cross

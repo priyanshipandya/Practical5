@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:practical5/main.dart';
 
+import '../constants/string_constant.dart';
+import 'home_page.dart';
+
 class Inc extends StatefulWidget{
   Inc({Key? key,required this.numbers}) : super(key: key);
   final numbers;
@@ -8,12 +11,20 @@ class Inc extends StatefulWidget{
   State<Inc> createState() => _IncState();
 }
 
-class _IncState extends State<Inc> {
+class _IncState extends State<Inc> with RouteAware{
   int number = 0;
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
      number = widget.numbers;
+  }
+
+  @override
+  void initState() {
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      routeObserver.subscribe(this, ModalRoute.of(context)!);
+    });
+    super.initState();
   }
 
   @override
@@ -30,14 +41,18 @@ class _IncState extends State<Inc> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Increment",
+                    "${StringConstants.increment}",
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   IconButton(
-                    onPressed: () => navKey.currentState?.popUntil((route) => route.isFirst),
+                    onPressed: () => navKey.currentState?.pushAndRemoveUntil(
+                        MaterialPageRoute(
+                          builder: (context) => HomePage(),
+                        ),
+                            (route) => false),
                     icon: Icon(Icons.home),
                   ),
                 ],
@@ -46,7 +61,7 @@ class _IncState extends State<Inc> {
                 child: Column(
                   children: [
                     Text(
-                      "You pressed the button",
+                      "${StringConstants.youPressedTheButton}",
                       style: TextStyle(color: Colors.black),
                     ),
                     Text(
@@ -65,7 +80,7 @@ class _IncState extends State<Inc> {
       floatingActionButton:
           Row(mainAxisAlignment: MainAxisAlignment.end, children: [
             FloatingActionButton(
-              heroTag: 'button 1',
+              heroTag: '${StringConstants.button1}',
               onPressed: () {
                 setState(() {
                   number++;
@@ -77,7 +92,7 @@ class _IncState extends State<Inc> {
               width: 20,
             ),
             FloatingActionButton(
-              heroTag: 'button 2',
+              heroTag: '${StringConstants.button2}',
               onPressed: () {
                 setState(() {
                   Navigator.of(context).pushNamed('/Dec', arguments: number);
@@ -90,5 +105,24 @@ class _IncState extends State<Inc> {
       ]),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
+  }
+
+  @override
+  void didPopNext() {
+    print("Did Pop Next");
+  }
+  @override
+  void didPush() {
+    print("Did Push");
+  }
+
+  @override
+  void didPop() {
+    print("Did Pop");
+  }
+
+  @override
+  void didPushNext() {
+    print("Did Push Next");
   }
 }

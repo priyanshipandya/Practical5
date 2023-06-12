@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:practical5/constants/string_constant.dart';
 
 import '../Models/news.dart';
 
@@ -37,7 +38,7 @@ class _NewsPageState extends State<NewsPage> {
                         },
                       ),
                       Text(
-                        "Back",
+                        "${StringConstants.back}",
                         style: TextStyle(
                           fontSize: 17,
                         ),
@@ -72,12 +73,12 @@ class _NewsPageState extends State<NewsPage> {
                   child: Row(
                     children: [
                       Text(
-                        "Written by bestfolkmedicine",
+                        "${StringConstants.writtenByBestFolkMedicine}",
                         style: TextStyle(fontSize: 15),
                       ),
                       Spacer(flex: 5),
                       Text(
-                        "2 days ago",
+                        "${StringConstants.writtenByBestFolkMedicine}",
                         style: TextStyle(color: Colors.grey),
                       ),
                       Spacer(flex: 1),

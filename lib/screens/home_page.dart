@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:practical5/constants/string_constant.dart';
 import 'package:practical5/screens/fav_page.dart';
 import 'package:practical5/screens/inc.dart';
 import 'package:practical5/screens/settings.dart';
@@ -36,14 +37,14 @@ class _HomePageState extends State<HomePage> {
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.house_fill), label: "Home"),
+              icon: Icon(CupertinoIcons.house_fill), label: "${StringConstants.home}"),
           BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.cart_fill), label: "Store"),
+              icon: Icon(CupertinoIcons.cart_fill), label: "${StringConstants.store}"),
           BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.star_fill), label: "Favourite"),
+              icon: Icon(CupertinoIcons.star_fill), label: "${StringConstants.favourites}"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.settings), label: "Settings"),
-          BottomNavigationBarItem(icon: Icon(Icons.add), label: "IcrDec")
+              icon: Icon(Icons.settings), label: "${StringConstants.settings}"),
+          BottomNavigationBarItem(icon: Icon(Icons.add), label: "${StringConstants.icrdcr}")
         ],
         onTap: (index) {
           setState(() {

@@ -6,6 +6,8 @@ import 'package:practical5/screens/home_page.dart';
 import 'package:practical5/screens/inc.dart';
 import 'package:practical5/screens/dec.dart';
 
+import 'api_service.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,6 +17,7 @@ Future<void> main() async {
 
 final GlobalKey<NavigatorState> navKey = GlobalKey();
 final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
+final newsapi = NewsAPI_Service();
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);

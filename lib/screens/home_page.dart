@@ -44,7 +44,6 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(CupertinoIcons.star_fill), label: "${StringConstants.favourites}"),
           BottomNavigationBarItem(
               icon: Icon(Icons.settings), label: "${StringConstants.settings}"),
-          BottomNavigationBarItem(icon: Icon(Icons.add), label: "${StringConstants.icrdcr}")
         ],
         onTap: (index) {
           setState(() {

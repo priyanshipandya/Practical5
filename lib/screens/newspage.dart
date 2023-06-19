@@ -1,20 +1,13 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
 import 'package:practical5/constants/string_constant.dart';
 
-import '../Models/news.dart';
-
-class NewsPage extends StatefulWidget {
-  NewsPage({Key? key, required this.news}) : super(key: key);
-  final News news;
-
-  @override
-  State<NewsPage> createState() => _NewsPageState();
-}
-
-class _NewsPageState extends State<NewsPage> {
-  bool star = true;
+class NewsPage extends StatelessWidget {
+  NewsPage({Key? key, this.index, this.newsapi, this.fromPage}) : super(key: key);
+  final index;
+  final newsapi;
+  final fromPage;
 
   @override
   Widget build(BuildContext context) {
@@ -22,88 +15,97 @@ class _NewsPageState extends State<NewsPage> {
       body: SafeArea(
         child: SizedBox(
           width: double.infinity,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  child: Row(
+          child: Observer(
+            builder: (context) => newsapi.apidataAll?.status ==
+                    FutureStatus.pending
+                ? Center(child: CircularProgressIndicator())
+                : Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      IconButton(
-                        icon: Icon(Icons.arrow_back_ios),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                      Text(
-                        "${StringConstants.back}",
-                        style: TextStyle(
-                          fontSize: 17,
+                      Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        child: Row(
+                          children: [
+                            IconButton(
+                              icon: Icon(Icons.arrow_back_ios),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                            Text(
+                              "${StringConstants.back}",
+                              style: TextStyle(
+                                fontSize: 17,
+                              ),
+                            ),
+                            Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8.0),
+                              child: Icon(Icons.share),
+                            ),
+                          ],
                         ),
                       ),
-                      Spacer(),
+                      Hero(
+                        tag: fromPage == "fav" ? "${newsapi.favList[index].title}" : "${newsapi.apidataAll?.value?.data?[index].title}" ,
+                        child: Image.network(fromPage == "fav" ? "${newsapi.favList[index].images}" :
+                          "${newsapi.apidataAll?.value?.data?[index].images}",
+                          height: 280,
+                          width: double.infinity,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
                       Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: Icon(Icons.share),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 15.0, vertical: 15),
+                        child: Text(fromPage == "fav" ? "${newsapi.favList[index].title}" :
+                        "${newsapi.apidataAll?.value?.data?[index].title}",
+                          style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Times New Roman'),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 0, 15, 20),
+                        child: Row(
+                          children: [
+                            Text(
+                              "${StringConstants.writtenByBestFolkMedicine}",
+                              style: TextStyle(fontSize: 15),
+                            ),
+                            Spacer(flex: 5),
+                            Text(
+                              "${newsapi.apidataAll?.value?.data?[index].author}",
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                            Spacer(flex: 1),
+                            IconButton(
+                              onPressed: () {
+                                newsapi.toggleStar(index);
+                              },
+                              icon: newsapi.starList![index]
+                                  ? Icon(Icons.star)
+                                  : Icon(Icons.star_border_outlined),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 15),
+                        child: Text(fromPage == "fav" ? "${newsapi.favList[index].decription}" :
+                        "${newsapi.apidataAll?.value?.data?[index].decription}",
+                          // widget.news.content!,
+                          style: TextStyle(
+                              fontFamily: 'Times New Roman',
+                              fontStyle: FontStyle.italic,
+                              fontSize: 17),
+                        ),
                       ),
                     ],
                   ),
-                ),
-                Hero(
-
-                  tag: 'myimage${widget.news.title}',
-                  child: Image.network(
-                    widget.news.imageUrl!,
-                    width: double.infinity,
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 15.0, vertical: 15),
-                  child: Text(
-                    widget.news.title!,
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, fontFamily: 'Times New Roman'),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 0, 15, 20),
-                  child: Row(
-                    children: [
-                      Text(
-                        "${StringConstants.writtenByBestFolkMedicine}",
-                        style: TextStyle(fontSize: 15),
-                      ),
-                      Spacer(flex: 5),
-                      Text(
-                        "${StringConstants.writtenByBestFolkMedicine}",
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                      Spacer(flex: 1),
-                      IconButton(
-                        onPressed: () {
-                          setState(() {
-                            star = !star;
-                          });
-                        },
-                        icon: star
-                            ? Icon(Icons.star)
-                            : Icon(Icons.star_border_outlined),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  child: Text(
-                    widget.news.content!,
-                    style: TextStyle(fontFamily: 'Times New Roman', fontStyle: FontStyle.italic, fontSize: 17),
-                  ),
-                ),
-              ],
-            ),
           ),
         ),
       ),

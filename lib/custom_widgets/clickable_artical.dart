@@ -2,25 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 
-import '../api_service.dart';
+import '../store/api_service.dart';
 import '../constants/string_constant.dart';
 import '../main.dart';
-import '../screens/newspage.dart';
+import '../screens/newspage_mobx.dart';
 
-class ClickableArticale extends StatefulWidget {
+class ClickableArticale extends StatelessWidget {
   ClickableArticale();
 
-  @override
-  State<ClickableArticale> createState() => _ClickableArticaleState();
-}
-
-class _ClickableArticaleState extends State<ClickableArticale> {
   @override
   Widget build(BuildContext context) {
     return Observer(
       builder: (context) => SizedBox(
         height: 320,
-        child: ListView.builder(
+        child: newsapi.apidataAll?.status == FutureStatus.pending ? Center(child: CircularProgressIndicator(),): ListView.builder(
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
           itemCount: newsapi.apidataAll?.value?.data?.length,
@@ -33,7 +28,7 @@ class _ClickableArticaleState extends State<ClickableArticale> {
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          NewsPage(index: index, newsapi: newsapi),
+                          NewsPage(index: index),
                     ),
                   );
                 },
@@ -63,15 +58,15 @@ class _ClickableArticaleState extends State<ClickableArticale> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(
+                                  padding: EdgeInsets.symmetric(
                                       vertical: 10.0, horizontal: 15),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
-                                    children: const [
-                                      Text("${StringConstants.life}"),
+                                    children: [
+                                      Text("${newsapi.apidataAll?.value?.category}"),
                                       Text(
-                                        "${StringConstants.twoDaysAgo}",
+                                        "${newsapi.apidataAll?.value?.data?[index].time}",
                                         style: TextStyle(
                                             color: Colors.grey, fontSize: 12),
                                       ),

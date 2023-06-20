@@ -6,7 +6,7 @@ import 'package:practical5/screens/home_page.dart';
 import 'package:practical5/screens/inc.dart';
 import 'package:practical5/screens/dec.dart';
 
-import 'api_service.dart';
+import 'store/api_service.dart';
 
 
 Future<void> main() async {

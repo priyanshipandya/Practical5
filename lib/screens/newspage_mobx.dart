@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:practical5/constants/string_constant.dart';
+import '../main.dart';
+import '../store/api_service.dart';
 
 class NewsPage extends StatelessWidget {
-  NewsPage({Key? key, this.index, this.newsapi, this.fromPage}) : super(key: key);
+  NewsPage({Key? key, this.index})
+      : super(key: key);
   final index;
-  final newsapi;
-  final fromPage;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,8 +49,8 @@ class NewsPage extends StatelessWidget {
                         ),
                       ),
                       Hero(
-                        tag: fromPage == "fav" ? "${newsapi.favList[index].title}" : "${newsapi.apidataAll?.value?.data?[index].title}" ,
-                        child: Image.network(fromPage == "fav" ? "${newsapi.favList[index].images}" :
+                        tag: "${newsapi.apidataAll?.value?.data?[index].images}",
+                        child: Image.network(
                           "${newsapi.apidataAll?.value?.data?[index].images}",
                           height: 280,
                           width: double.infinity,
@@ -60,8 +60,7 @@ class NewsPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 15.0, vertical: 15),
-                        child: Text(fromPage == "fav" ? "${newsapi.favList[index].title}" :
-                        "${newsapi.apidataAll?.value?.data?[index].title}",
+                        child: Text("${newsapi.apidataAll?.value?.data?[index].title}",
                           style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
@@ -86,7 +85,7 @@ class NewsPage extends StatelessWidget {
                               onPressed: () {
                                 newsapi.toggleStar(index);
                               },
-                              icon: newsapi.starList![index]
+                              icon: newsapi.myMainStarList![index]
                                   ? Icon(Icons.star)
                                   : Icon(Icons.star_border_outlined),
                             ),
@@ -95,9 +94,8 @@ class NewsPage extends StatelessWidget {
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 15),
-                        child: Text(fromPage == "fav" ? "${newsapi.favList[index].decription}" :
-                        "${newsapi.apidataAll?.value?.data?[index].decription}",
-                          // widget.news.content!,
+                        child: Text(
+                          "${newsapi.apidataAll?.value?.data?[index].decription}",
                           style: TextStyle(
                               fontFamily: 'Times New Roman',
                               fontStyle: FontStyle.italic,

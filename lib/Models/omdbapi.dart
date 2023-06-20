@@ -43,7 +43,8 @@ class Data {
         this.inshortsLink,
         this.readMore,
         this.time,
-        this.title});
+        this.title,
+        });
 
   Data.fromJson(Map<String, dynamic> json) {
     author = json['author'];

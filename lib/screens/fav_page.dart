@@ -6,6 +6,7 @@ import 'newspage_mobx.dart';
 
 class FavPage extends StatelessWidget {
   FavPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,76 +25,80 @@ class FavPage extends StatelessWidget {
               ),
             ),
             Observer(
-              builder: (context) => Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: newsapi.myMainStarList?.length,
-                  itemBuilder: (context, index) {
-                    return newsapi.myMainStarList[index]
-                        ? Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 5, horizontal: 20),
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => NewsPage(
-                                        index: index,
-                                        ),
-                                  ),
-                                );
-                              },
-                              child: Row(
-                                children: [
-                                  Image.network(
-                                    newsapi.apidataAll?.value?.data?[index].images ?? "",
-                                    height: 100,
-                                    width: 150,
-                                    fit: BoxFit.fill,
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "${newsapi.apidataAll?.value?.data?[index].title}",
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 18,
-                                              fontFamily: 'Times New Roman'),
-                                        ),
-                                        Text(
-                                          "${StringConstants.fourDaysAgo}",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${newsapi.apidataAll?.value?.data?[index].decription}",
-                                          maxLines: 3,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(color: Colors.grey),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
+              builder: (context) {
+                var favList = newsapi.apidataAll?.value?.value.data
+                    ?.where((element) => element.isFav == true).toList();
+                print(favList?.length);
+                print(newsapi.favList.length);
+                return Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: favList?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => NewsPage(
+                                  index: index,
+                                  data: favList?[index],
+                                  from: "fav",
+                                ),
                               ),
-                            ),
-                          )
-                        : SizedBox.shrink();
-                  },
-                ),
-              ),
+                            );
+                          },
+                          child: Row(
+                            children: [
+                              Image.network(
+                                favList?[index].images ?? '',
+                                height: 100,
+                                width: 150,
+                                fit: BoxFit.fill,
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "${favList?[index].title ?? ''}",
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 18,
+                                          fontFamily: 'Times New Roman'),
+                                    ),
+                                    Text(
+                                      "${StringConstants.fourDaysAgo}",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      "${favList?[index].decription ?? ''}",
+                                      maxLines: 3,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(color: Colors.grey),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                );
+              },
             ),
           ],
         ),

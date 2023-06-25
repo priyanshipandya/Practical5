@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:practical5/store/api_service.dart';
 import 'package:provider/provider.dart';
-import '../Models/omdbapi.dart';
+import '../Models/news_modal.dart';
 import '../constants/string_constant.dart';
 import '../provider/api_service.dart';
 import '../screens/newspage_mobx.dart';

@@ -18,7 +18,7 @@ class ClickableArticale extends StatelessWidget {
         child: newsapi.apidataAll?.status == FutureStatus.pending ? Center(child: CircularProgressIndicator(),): ListView.builder(
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
-          itemCount: newsapi.apidataAll?.value?.data?.length,
+          itemCount: newsapi.apidataAll?.value?.value.data?.length,
           itemBuilder: (context, index) {
             return Padding(
               padding: EdgeInsets.only(top: 8, right: 0, bottom: 16, left: 20),
@@ -28,7 +28,7 @@ class ClickableArticale extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          NewsPage(index: index),
+                          NewsPage(index: index, data: newsapi.apidataAll?.value?.value.data?[index]),
                     ),
                   );
                 },
@@ -48,10 +48,10 @@ class ClickableArticale extends StatelessWidget {
                               children: [
                                 Hero(
                                   tag:
-                                      "${newsapi.apidataAll?.value?.data?[index].title}",
+                                      "${newsapi.apidataAll?.value?.value.data?[index].title}",
                                   transitionOnUserGestures: true,
                                   child: Image.network(
-                                    "${newsapi.apidataAll?.value?.data?[index].images}",
+                                    "${newsapi.apidataAll?.value?.value.data?[index].images}",
                                     height: 180,
                                     width: double.infinity,
                                     fit: BoxFit.fill,
@@ -64,9 +64,9 @@ class ClickableArticale extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text("${newsapi.apidataAll?.value?.category}"),
+                                      Text("${newsapi.apidataAll?.value?.value.category}"),
                                       Text(
-                                        "${newsapi.apidataAll?.value?.data?[index].time}",
+                                        "${newsapi.apidataAll?.value?.value.data?[index].time}",
                                         style: TextStyle(
                                             color: Colors.grey, fontSize: 12),
                                       ),
@@ -77,7 +77,7 @@ class ClickableArticale extends StatelessWidget {
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 15.0),
                                   child: Text(
-                                    "${newsapi.apidataAll?.value?.data?[index].title}",
+                                    "${newsapi.apidataAll?.value?.value.data?[index].title}",
                                     maxLines: 3,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(

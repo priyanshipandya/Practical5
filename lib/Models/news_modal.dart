@@ -1,3 +1,14 @@
+
+//make this with store
+//  why?
+//have you done todo app
+
+//in that we used to make that todo class observable
+//and one another store i.e. parent which was containing todo list
+//and that was also with store
+//it is example of store wih, ik but eena mathe to me apimodle ne observable banayu he
+// divyang ee aavi ritna j kidhu tu last time
+
 class NewsModel {
   String? category;
   int? countArticles;
@@ -35,7 +46,7 @@ class Data {
   String? readMore;
   String? time;
   String? title;
-
+  bool isFav = false;
   Data(
       {this.author,
         this.decription,
@@ -44,6 +55,7 @@ class Data {
         this.readMore,
         this.time,
         this.title,
+        this.isFav = false,
         });
 
   Data.fromJson(Map<String, dynamic> json) {
@@ -54,6 +66,7 @@ class Data {
     readMore = json['read-more'];
     time = json['time'];
     title = json['title'];
+    isFav = false;
   }
 
   Map<String, dynamic> toJson() {
@@ -65,6 +78,7 @@ class Data {
     data['read-more'] = this.readMore;
     data['time'] = this.time;
     data['title'] = this.title;
+    data['isFav'] = this.isFav;
     return data;
   }
 }

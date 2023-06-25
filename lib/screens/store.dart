@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:practical5/Models/store.dart';
+import 'package:practical5/Models/store_modal.dart';
 import '../constants/string_constant.dart';
 import '../custom_widgets/custom_text_field.dart';
 

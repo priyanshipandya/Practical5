@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import '../Models/omdbapi.dart';
+import '../Models/news_modal.dart';
 
 class APIServiceUsingProvider{
   static APIServiceUsingProvider? _instance;

@@ -6,20 +6,21 @@ import '../main.dart';
 import '../store/api_service.dart';
 
 class NewsPage extends StatelessWidget {
-  NewsPage({Key? key, this.index})
-      : super(key: key);
+  NewsPage({Key? key, this.index, this.data, this.from}) : super(key: key);
   final index;
+  final data;
+  final from;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: SizedBox(
           width: double.infinity,
-          child: Observer(
-            builder: (context) => newsapi.apidataAll?.status ==
-                    FutureStatus.pending
-                ? Center(child: CircularProgressIndicator())
-                : Column(
+          child: newsapi.apidataAll?.status == FutureStatus.pending
+              ? Center(child: CircularProgressIndicator())
+              : SingleChildScrollView(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -49,9 +50,9 @@ class NewsPage extends StatelessWidget {
                         ),
                       ),
                       Hero(
-                        tag: "${newsapi.apidataAll?.value?.data?[index].images}",
+                        tag: "${data.title}",
                         child: Image.network(
-                          "${newsapi.apidataAll?.value?.data?[index].images}",
+                          "${data.images}",
                           height: 280,
                           width: double.infinity,
                           fit: BoxFit.fill,
@@ -60,7 +61,8 @@ class NewsPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 15.0, vertical: 15),
-                        child: Text("${newsapi.apidataAll?.value?.data?[index].title}",
+                        child: Text(
+                          "${data.title}",
                           style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
@@ -77,17 +79,24 @@ class NewsPage extends StatelessWidget {
                             ),
                             Spacer(flex: 5),
                             Text(
-                              "${newsapi.apidataAll?.value?.data?[index].author}",
+                              "${data.author}",
                               style: TextStyle(color: Colors.grey),
                             ),
                             Spacer(flex: 1),
-                            IconButton(
-                              onPressed: () {
-                                newsapi.toggleStar(index);
+                            Observer(
+                              builder: (context) {
+                                final favList = newsapi.favList;
+                                int? newIndex = 0;
+
+                                return IconButton(
+                                  onPressed: () {
+                                    newsapi.toggleStar(index, data);
+                                  },
+                                  icon: data.isFav
+                                      ? Icon(Icons.star)
+                                      : Icon(Icons.star_border_outlined),
+                                );
                               },
-                              icon: newsapi.myMainStarList![index]
-                                  ? Icon(Icons.star)
-                                  : Icon(Icons.star_border_outlined),
                             ),
                           ],
                         ),
@@ -95,7 +104,7 @@ class NewsPage extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 15),
                         child: Text(
-                          "${newsapi.apidataAll?.value?.data?[index].decription}",
+                          "${data.decription}",
                           style: TextStyle(
                               fontFamily: 'Times New Roman',
                               fontStyle: FontStyle.italic,
@@ -104,7 +113,7 @@ class NewsPage extends StatelessWidget {
                       ),
                     ],
                   ),
-          ),
+                ),
         ),
       ),
     );

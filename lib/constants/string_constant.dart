@@ -18,12 +18,13 @@ class StringConstants{
   static const mainArticles = "Main articles";
   static const seeMore = "See More";
   static const youhaveNotFinishedReading = "You have not finished reading";
-  static const bestFolkMedicine = "Best Folk Medicine";
+  static const bestFolkMedicine = "Best Folk News";
   static const back = "Back";
-  static const writtenByBestFolkMedicine = "Written by bestfolkmedicine";
+  static const writtenByBestFolkMedicine = "Written by bestfolknews";
   static const aboutTheApp = "About the app";
   static const login = "Login";
   static const signUp = "Sign Up";
   static const notification = "Notifications";
   static const shop = "Shop";
+  static const noFav = "No Favourites";
 }

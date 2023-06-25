@@ -3,13 +3,11 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:practical5/constants/string_constant.dart';
 import '../main.dart';
-import '../store/api_service.dart';
 
 class NewsPage extends StatelessWidget {
-  NewsPage({Key? key, this.index, this.data, this.from}) : super(key: key);
-  final index;
+  NewsPage({Key? key, this.data}) : super(key: key);
   final data;
-  final from;
+
 
   @override
   Widget build(BuildContext context) {
@@ -85,14 +83,11 @@ class NewsPage extends StatelessWidget {
                             Spacer(flex: 1),
                             Observer(
                               builder: (context) {
-                                final favList = newsapi.favList;
-                                int? newIndex = 0;
-
                                 return IconButton(
                                   onPressed: () {
-                                    newsapi.toggleStar(index, data);
+                                    newsapi.toggleStar(data);
                                   },
-                                  icon: data.isFav
+                                  icon: newsapi.favList.contains(data)
                                       ? Icon(Icons.star)
                                       : Icon(Icons.star_border_outlined),
                                 );

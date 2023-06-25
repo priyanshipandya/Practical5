@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import '../Models/news_modal.dart';
+import 'package:practical5/store/api_service.dart';
 
 class APIServiceUsingProvider{
   static APIServiceUsingProvider? _instance;
@@ -29,8 +30,18 @@ class APIServiceUsingProvider{
 
 class OperationsOnAPI extends ChangeNotifier{
   List<bool> apiProviderStars = List.filled(APIServiceUsingProvider().length, false);
-  void toggleStar(int index){
-    apiProviderStars[index] = !apiProviderStars[index];
+  bool isSeeMore = false;
+  void isSeeMoreEnabled(){
+    isSeeMore = !isSeeMore;
+  }
+
+  void toggleStar(Data data){
+    data.isFav = !data.isFav;
+    if(data.isFav){
+      NewsAPI_Service().favList.add(data);
+    }else{
+      NewsAPI_Service().favList.remove(data);
+    }
     notifyListeners();
   }
 }

@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:practical5/store/api_service.dart';
 import 'package:provider/provider.dart';
 import '../Models/news_modal.dart';
-import '../constants/string_constant.dart';
 import '../provider/api_service.dart';
-import '../screens/newspage_mobx.dart';
-import '../screens/newspage_provider.dart';
 
 class ScrollArticle extends StatelessWidget {
   ScrollArticle();
@@ -23,14 +19,20 @@ class ScrollArticle extends StatelessWidget {
             : ListView.builder(
                 primary: false,
                 shrinkWrap: true,
-                itemCount: newsApi?.data?.length,
+                itemCount: 7 ,
+                // APIServiceUsingProvider().newsModel?.data?.length,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 5, horizontal: 20),
                     child: Row(
                       children: [
                         Image.network(
-                          newsApi?.data?[index].images ?? "",
+                          APIServiceUsingProvider()
+                                  .newsModel
+                                  ?.data?[index]
+                                  .images ??
+                              "",
                           height: 100,
                           width: 150,
                           fit: BoxFit.fill,
@@ -53,14 +55,13 @@ class ScrollArticle extends StatelessWidget {
                                     fontFamily: 'Times New Roman'),
                               ),
                               Text(
-                                "${newsApi?.data?[index].time}",
+                                "${APIServiceUsingProvider().newsModel?.data?[index].time}",
                                 style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey
-                                ),
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey),
                               ),
                               Text(
-                                "${newsApi?.data?[index].decription}",
+                                "${APIServiceUsingProvider().newsModel?.data?[index].decription}",
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(color: Colors.grey),

@@ -16,7 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List pages = [LandingPage(), StorePage(), FavPage(), SettingPage(), Inc(numbers: 0,)];
+  List<Widget> pages = [LandingPage(), StorePage(), FavPage(), SettingPage(), Inc(numbers: 0,)];
   int selectedIndex = 0;
 
   @override
@@ -25,10 +25,12 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: pages[selectedIndex],
+      body: IndexedStack(index: selectedIndex, children: pages),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedIndex,
         unselectedItemColor: Colors.grey,
